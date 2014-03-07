@@ -5,13 +5,20 @@ Synopsis:    A small readline replacement
 Authors:     Katherine Whitlock
 License:     BSD-3-clause
 
+
+PreInstallCommand: cc -shared -o _build/src/dlllinenoise_stubs.so -llinenoise
+
 Library linenoise
   Path:       .
   BuildTools: ocamlbuild
+  CSources: linenoise/linenoise.c, linenoise/linenoise.h
+  CCLib: -llinenoise
+  DllLib: -llinenoise_stubs
+  BuildDepends: ctypes.foreign, core, threads
   Modules:    Linenoise
   
 Executable example
   Path:       .
   BuildTools: ocamlbuild
   MainIs:     example.ml
-  
+  BuildDepends: linenoise

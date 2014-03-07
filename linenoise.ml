@@ -31,10 +31,10 @@ let ()   = seal completions
 let completion_callback_t = string @-> ptr completions @-> returning void
 
 let set_completion_callback = 
-  foreign "linenoise_set_completion_callback" (funptr completion_callback_t @-> returning void)
+  foreign "linenoiseSetCompletionCallback" (funptr completion_callback_t @-> returning void)
 
 let add_completion = 
-  foreign "linenoise_add_completion" (ptr completions @-> string @-> returning void)
+  foreign "linenoiseAddCompletion" (ptr completions @-> string @-> returning void)
 
 
 let linenoise =
