@@ -1,0 +1,17 @@
+OASISFormat: 0.4
+Name:        linenoise
+Version:     0.1
+Synopsis:    A small readline replacement
+Authors:     Katherine Whitlock
+License:     BSD-3-clause
+
+Library linenoise
+  Path:       .
+  BuildTools: ocamlbuild
+  Modules:    Linenoise
+  
+Executable example
+  Path:       .
+  BuildTools: ocamlbuild
+  MainIs:     example.ml
+  
