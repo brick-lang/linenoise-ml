@@ -14,13 +14,13 @@ let () = Cstubs.register_paths completions
     ~value:"Linenoise_bindings.completions"
     ~typ:"Linenoise_bindings.completions"
 
+type completion_callback_typ = string -> completions structure ptr -> unit
+
 let completion_callback_typ = Foreign.funptr (string @-> ptr completions @-> returning void)
 
-let () = Cstubs.register_paths completion_callback_typ
+let () = Cstubs.register_paths completion_callback_typ  
     ~value:"Linenoise_bindings.completion_callback_typ"
     ~typ:"Linenoise_bindings.completion_callback_typ"
-
-
 
 module Bindings(F : sig val foreign : string -> ('a -> 'b) fn -> unit end) = struct
                                 
@@ -53,8 +53,9 @@ module Bindings(F : sig val foreign : string -> ('a -> 'b) fn -> unit end) = str
 end
 
 let c_headers = "
+#include <stddef.h>
 #include \"linenoise_c/linenoise.h\"
-#include \"cstubs/cstubs_internals.h\"
+#include \"headers/cstubs_internals.h\"
 "
 
 let make_stubname cname = "linenoise_stub_" ^ cname
