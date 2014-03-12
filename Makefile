@@ -1,7 +1,10 @@
 all:liblinenoise.a
 
 liblinenoise.a: linenoise.o
-	ar $@ $<
+	ar rcs $@ $<
 
 linenoise.o: linenoise.c
-	$(CC) $< -o $@
+	$(CC) -c $< -o $@
+
+clean:
+	rm -f linenoise.o liblinenoise.a
