@@ -13,13 +13,6 @@ Library linenoise
   Modules:    Linenoise
   Install:    true
   
-Executable example
-  Path:       .
-  BuildTools: ocamlbuild
-  MainIs:     example.ml
-  BuildDepends: linenoise
-  Install: false
-
 SourceRepository head
   Type: git
   Location: https://github.com/brick-lang/linenoise-ml
