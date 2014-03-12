@@ -1,4 +1,5 @@
 S .
 B _build
 PKG ctypes.foreign
+PKG ctyles.stubs
 PKG core
