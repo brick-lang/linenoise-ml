@@ -8,7 +8,7 @@ License:     BSD-3-clause
 Library linenoise
   Path:       .
   BuildTools: ocamlbuild
-  CSources: linenoise/linenoise.c, linenoise/linenoise.h
+  CSources: linenoise.c, linenoise.h
   BuildDepends: ctypes.foreign, core, threads
   Modules:    Linenoise
   Install:    true
