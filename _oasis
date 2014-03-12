@@ -5,20 +5,22 @@ Synopsis:    A small readline replacement
 Authors:     Katherine Whitlock
 License:     BSD-3-clause
 
-
-PreInstallCommand: cc -shared -o _build/src/dlllinenoise_stubs.so -llinenoise
-
 Library linenoise
   Path:       .
   BuildTools: ocamlbuild
   CSources: linenoise/linenoise.c, linenoise/linenoise.h
-  CCLib: -llinenoise
-  DllLib: -llinenoise_stubs
   BuildDepends: ctypes.foreign, core, threads
   Modules:    Linenoise
+  Install:    true
   
 Executable example
   Path:       .
   BuildTools: ocamlbuild
   MainIs:     example.ml
   BuildDepends: linenoise
+  Install: false
+
+SourceRepository head
+  Type: git
+  Location: https://github.com/brick-lang/linenoise-ml
+  Browser: https://github.com/brick-lang/linenoise-ml

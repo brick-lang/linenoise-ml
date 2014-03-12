@@ -16,7 +16,7 @@ let () =
     decr count;
     if (Array.get Sys.argv !count) = "--multiline" then 
       begin
-        Linenoise.set_multiline 1;
+        Linenoise.set_multi_line 1;
         print_string "Multi-line mode enabled"
       end
     else

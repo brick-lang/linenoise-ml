@@ -37,5 +37,5 @@ let history_load =
 let clear_screen =
   foreign "linenoiseClearScreen" (void @-> returning void)
 
-let set_multiline = 
-  foreign "linenoiseSetMultiline" (int @-> returning void)
+let set_multi_line = 
+  foreign "linenoiseSetMultiLine" (int @-> returning void)
