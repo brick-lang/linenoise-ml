@@ -4,6 +4,7 @@ Version:     0.1
 Synopsis:    A small readline replacement
 Authors:     Katherine Whitlock
 License:     BSD-3-clause
+Plugins: META(0.4)
 
 Library linenoise
   Path:       .

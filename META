@@ -1,6 +1,0 @@
-name = "linenoise"
-version = "1.0"
-description = "A smaller readline replacement"
-requires = "ctypes core"
-archive(byte) = "linenoise.cma"
-archive(native) = "linenoise.cmxa"
