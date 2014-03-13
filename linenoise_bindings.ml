@@ -77,4 +77,5 @@ let main () =
   close_out ml_out;
   close_out c_out
 
-let () = main ()
+(* let () = main ()
+ *)
