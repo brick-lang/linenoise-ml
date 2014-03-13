@@ -1,21 +1,21 @@
-external linenoiseSetCompletionCallback : Cstubs_internals.voidp -> unit 
+external set_completion_callback : Cstubs_internals.voidp -> unit 
   = "linenoise_stub_linenoiseSetCompletionCallback" 
-let linenoiseSetCompletionCallback :
+let set_completion_callback :
                                      Linenoise_bindings.completion_callback_typ
                                      -> unit 
   = fun x1 ->
-      linenoiseSetCompletionCallback
+      set_completion_callback
       (Ctypes.coerce Linenoise_bindings.completion_callback_typ
       (Ctypes.ptr Ctypes.void) x1).Cstubs_internals.raw_ptr
 
-external linenoiseAddCompletion : Cstubs_internals.voidp ->
+external add_completion : Cstubs_internals.voidp ->
                                   Cstubs_internals.voidp -> unit 
   = "linenoise_stub_linenoiseAddCompletion" 
-let linenoiseAddCompletion :
+let add_completion :
                              Linenoise_bindings.completions Ctypes.structure
                              Ctypes.ptr -> string -> unit 
   = fun x2 x3 ->
-      linenoiseAddCompletion x2.Cstubs_internals.raw_ptr
+      add_completion x2.Cstubs_internals.raw_ptr
       (Ctypes.coerce Ctypes.string (Ctypes.ptr Ctypes.char) x3).Cstubs_internals.raw_ptr
 
 external linenoise : Cstubs_internals.voidp -> Cstubs_internals.voidp 
@@ -27,33 +27,33 @@ let linenoise : string -> string
          (linenoise
            (Ctypes.coerce Ctypes.string (Ctypes.ptr Ctypes.char) x4).Cstubs_internals.raw_ptr))
 
-external linenoiseHistoryAdd : Cstubs_internals.voidp -> int 
+external history_add : Cstubs_internals.voidp -> int 
   = "linenoise_stub_linenoiseHistoryAdd" 
-let linenoiseHistoryAdd : string -> int 
+let history_add : string -> int 
   = fun x5 ->
-      linenoiseHistoryAdd
+      history_add
       (Ctypes.coerce Ctypes.string (Ctypes.ptr Ctypes.char) x5).Cstubs_internals.raw_ptr
 
-external linenoiseHistorySetMaxLen : int -> int 
+external history_set_max_len : int -> int 
   = "linenoise_stub_linenoiseHistorySetMaxLen" 
 
-external linenoiseHistorySave : Cstubs_internals.voidp -> int 
+external history_save : Cstubs_internals.voidp -> int 
   = "linenoise_stub_linenoiseHistorySave" 
-let linenoiseHistorySave : string -> int 
+let history_save : string -> int 
   = fun x7 ->
-      linenoiseHistorySave
+      history_save
       (Ctypes.coerce Ctypes.string (Ctypes.ptr Ctypes.char) x7).Cstubs_internals.raw_ptr
 
-external linenoiseHistoryLoad : Cstubs_internals.voidp -> int 
+external history_load : Cstubs_internals.voidp -> int 
   = "linenoise_stub_linenoiseHistoryLoad" 
-let linenoiseHistoryLoad : string -> int 
+let history_load : string -> int 
   = fun x8 ->
-      linenoiseHistoryLoad
+      history_load
       (Ctypes.coerce Ctypes.string (Ctypes.ptr Ctypes.char) x8).Cstubs_internals.raw_ptr
 
-external linenoiseClearScreen : unit -> unit 
+external clear_screen : unit -> unit 
   = "linenoise_stub_linenoiseClearScreen" 
 
-external linenoiseSetMultiLine : int -> unit 
+external set_multi_line : int -> unit 
   = "linenoise_stub_linenoiseSetMultiLine" 
 
