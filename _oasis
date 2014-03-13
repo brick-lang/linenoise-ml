@@ -14,13 +14,6 @@ Library linenoise
   Modules:    Linenoise_bindings, Linenoise
   Install:    true
 
-Executable example
-  Path:       .
-  BuildTools: ocamlbuild
-  BuildDepends: linenoise
-  MainIs: example.ml
-  Install:    false
-  CompiledObject: native
   
 SourceRepository head
   Type: git
