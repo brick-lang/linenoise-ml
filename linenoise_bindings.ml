@@ -10,19 +10,10 @@ let len  = completions *:* size_t
 let cvec = completions *:* ptr string
 let ()   = seal completions
 
-let () = Cstubs.register_paths completions
-    ~value:"Linenoise_bindings.completions"
-    ~typ:"Linenoise_bindings.completions"
-
 type completion_callback_typ = string -> completions structure ptr -> unit
-
 let completion_callback_typ = Foreign.funptr (string @-> ptr completions @-> returning void)
 
-let () = Cstubs.register_paths completion_callback_typ  
-    ~value:"Linenoise_bindings.completion_callback_typ"
-    ~typ:"Linenoise_bindings.completion_callback_typ"
-
-module Bindings(F : sig val foreign : string -> ('a -> 'b) fn -> unit end) = struct
+module Bindings(F : Cstubs.FOREIGN) = struct
                                 
   let set_completion_callback = 
     F.foreign "linenoiseSetCompletionCallback" (completion_callback_typ @-> returning void)
@@ -61,21 +52,17 @@ let c_headers = "
 let make_stubname cname = "linenoise_stub_" ^ cname
 
 let main () =
-  let ml_out = open_out "linenoise.ml"
+  let ml_out = open_out "linenoise_wrappers.ml"
   and c_out = open_out "linenoise_stubs.c" in
   let ml_fmt = Format.formatter_of_out_channel ml_out
   and c_fmt = Format.formatter_of_out_channel c_out in
   Format.fprintf c_fmt "%s@\n" c_headers;
-  let module M = Bindings(struct
-    let foreign cname fn =
-      let stub_name = make_stubname cname in
-      Cstubs.write_c ~stub_name ~cname c_fmt fn;
-      Cstubs.write_ml ~stub_name ~external_name:cname ml_fmt fn
-  end) in
+  let prefix = "linenoise_stub_" in
+  Cstubs.write_c c_fmt ~prefix (module Bindings);
+  Cstubs.write_ml ml_fmt ~prefix (module Bindings);
   Format.pp_print_flush ml_fmt ();
   Format.pp_print_flush c_fmt ();
   close_out ml_out;
   close_out c_out
 
-(* let () = main ()
- *)
+(* let () = main () *)

@@ -11,7 +11,7 @@ Library linenoise
   BuildTools: ocamlbuild
   CSources:  linenoise_stubs.c, linenoise_c/linenoise.c, linenoise_c/linenoise.h,  headers/complex_stubs.h,  headers/cstubs_internals.h, headers/managed_buffer_stubs.h,headers/primitives.h, headers/raw_pointer.h, headers/type_info_stubs.h, headers/unsigned_stubs.h
   BuildDepends: ctypes.foreign, ctypes.stubs, core, threads
-  Modules:    Linenoise_bindings, Linenoise
+  Modules:    Linenoise_bindings, Linenoise_wrappers, Linenoise
   Install:    true
 
   
