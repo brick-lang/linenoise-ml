@@ -1,1 +1,1 @@
-include Linenoise_bindings.Make(Linenoise_stubs)
+include Linenoise_bindings.Make(Linenoise_foreign)

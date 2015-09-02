@@ -7,21 +7,30 @@ License:     BSD-3-clause
 Plugins: META(0.4)
 
 Executable generate
+  Path:         .
+  MainIs:       generate.ml
+  BuildDepends: ctypes.foreign, ctypes.stubs
+  Install:      false
+  BuildTools:   ocamlbuild
+
+Library linenoise
+  Path:            .
+  Modules:         Linenoise
+  InternalModules: Linenoise_bindings, Linenoise_foreign
+  CSources:        linenoise_generated.c, linenoise_c/linenoise.c, linenoise_c/linenoise.h
+  CCOpt:           -I $pkg_ctypes_stubs
+  BuildDepends:    ctypes.foreign, ctypes.stubs
+  BuildTools:      ocamlbuild
+  Install:         true
+
+Executable example
   Path:       .
   BuildTools: ocamlbuild
-  MainIs:     generate.ml
-  BuildDepends: ctypes.foreign, ctypes.stubs, threads
+  MainIs:     example.ml
+  BuildDepends: linenoise, core
   CompiledObject: native
   Install:    false
 
-Library linenoise
-  Path:       .
-  BuildTools: ocamlbuild
-  CSources:  linenoise_stubs.c, linenoise_c/linenoise.c, linenoise_c/linenoise.h
-  BuildDepends: ctypes.foreign, ctypes.stubs, threads
-  Modules:    Linenoise_bindings, Linenoise_stubs, Linenoise
-  Install:    true
-  
 SourceRepository head
   Type: git
   Location: https://github.com/brick-lang/linenoise-ml

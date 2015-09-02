@@ -1,4 +1,7 @@
+
+#include <stdlib.h>
 #include "linenoise_c/linenoise.h"
+
 #include "ctypes_cstubs_internals.h"
 
 value linenoise_stub_1_linenoiseSetCompletionCallback(value x1)
