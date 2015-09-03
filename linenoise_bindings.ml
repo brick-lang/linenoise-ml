@@ -18,7 +18,7 @@ module Make(F : Cstubs.FOREIGN) = struct
     F.foreign "linenoiseAddCompletion" (ptr completions @-> string @-> returning void)
 
   let linenoise =
-    F.foreign "linenoise" (string @-> returning string)
+    F.foreign "linenoise" (string @-> returning string_opt)
       
   let history_add =
     F.foreign "linenoiseHistoryAdd" (string @-> returning int)

@@ -27,7 +27,7 @@ Executable example
   Path:       .
   BuildTools: ocamlbuild
   MainIs:     example.ml
-  BuildDepends: linenoise, core
+  BuildDepends: linenoise, core, threads
   CompiledObject: native
   Install:    false
 
