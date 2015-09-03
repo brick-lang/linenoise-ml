@@ -10,13 +10,13 @@ ocaml setup.ml -install
 ```
 ## Rebuilding the Stubs
 ```bash
-ocamlfind ocamlc -linkpkg -g -package ctypes -package ctypes.foreign -package ctypes.stubs linenoise_bindings.ml -o linenoise_bindings.native
-./linenoise_bindings.native
+ocamlbuild -use-ocamlfind -pkgs ctypes,ctypes.foreign,ctypes.stubs generate.native
+./generate.native
 ```
 
 ## Building the example
 The example is ported from the C example. It is functionally identical
 
 ```bash
-ocamlfind ocamlopt -linkpkg -g -thread -package core -package ctypes -package ctypes.foreign -package linenoise example.ml -o example.native
+ocamlfind ocamlopt -linkpkg -g -thread -package core -package linenoise example.ml -o example.native
 ```

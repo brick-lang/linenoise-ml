@@ -1,5 +1,5 @@
-open Core.Std
 open Linenoise
+open Core.Std
 
 let completion (buf:string) lc = 
   if (String.get buf 0) = 'h' then 
@@ -17,11 +17,11 @@ let () =
     if (Array.get Sys.argv !count) = "--multiline" then 
       begin
         Linenoise.set_multi_line 1;
-        print_string "Multi-line mode enabled"
+        Printf.printf "Multi-line mode enabled\n%!"
       end
     else
       begin
-        Printf.fprintf stderr "Usage: %s [--multiline]\n" prgname;
+        Printf.fprintf stderr "Usage: %s [--multiline]\n%!" prgname;
         exit 1
       end
   done;
@@ -29,23 +29,26 @@ let () =
   Linenoise.set_completion_callback completion;
   ignore (Linenoise.history_load "history.txt");
 
-  let line = ref (Linenoise.linenoise "hello> ") in
-  while !line <> "" do
-    
-    if (String.get !line 0) <> '/' then 
+  let rec loop () =
+    match Linenoise.linenoise "hello> " with
+    | None -> ()
+    | Some "" -> loop ()
+    | Some line when String.get line 0 <> '/' -> 
       begin
-        Printf.printf "echo: '%s'\n" !line;
-        ignore (Linenoise.history_add !line);
+        Printf.printf "echo: '%s'\n%!" line;
+        ignore (Linenoise.history_add line);
         ignore (Linenoise.history_save "history.txt");
+        loop ()
       end
-    else if (String.slice !line 0 11) = "/historylen" then
-      begin
-        let len = Int.of_string (String.slice !line 11 0) in
-        ignore (Linenoise.history_set_max_len len)
+    | Some line ->
+      begin match String.split ~on:' ' line with
+        | ["/historylen"; arg] ->
+          let len = Int.of_string (String.strip arg) in
+          ignore (Linenoise.history_set_max_len len);
+          loop ()
+        | _ ->
+          Printf.printf "Unrecognized command: %s\n%!" line;
+          loop ()
       end
-    else if (String.get !line 0) = '/' then
-      Printf.printf "Unrecognized command: %s\n" !line
-    else assert false;
-    line := (Linenoise.linenoise "hello> ")
-  done;
-  exit 0
+  in 
+    loop ()
