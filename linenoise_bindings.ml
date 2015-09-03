@@ -1,15 +1,15 @@
 open Ctypes
 open PosixTypes
 
-type completions
-let  completions: completions structure typ = structure "linenoiseCompletions"
-let len  = field completions "len" size_t
-let cvec = field completions "cvec" (ptr string)
-let ()   = seal completions
-
-let linenoiseCompletionCallback = string @-> ptr completions @-> returning void
-
 module Make(F : Cstubs.FOREIGN) = struct
+
+  type completions
+  let  completions: completions structure typ = structure "linenoiseCompletions"
+  let len  = field completions "len" size_t
+  let cvec = field completions "cvec" (ptr string)
+  let ()   = seal completions
+
+  let linenoiseCompletionCallback = string @-> ptr completions @-> returning void
 
   let set_completion_callback =
     F.foreign "linenoiseSetCompletionCallback" (Foreign.funptr linenoiseCompletionCallback @-> returning void)
